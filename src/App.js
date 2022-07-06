@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from '@emotion/react'
+import { createTheme } from '@mui/material'
+import './App.css'
+
+import Sidebar from './components/Sidebar'
+import AppState from './Contexts/AppState';
+
+const theme = createTheme({
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: 'Barlow, sans-serif',
+        },
+      },
+    },
+  },
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={theme}>
+      <AppState>
+        <div className="App">
+          <Sidebar />
+        </div>
+      </AppState>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App
